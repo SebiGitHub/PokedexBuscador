@@ -1,6 +1,5 @@
 package com.example.brawlbuscador
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.brawlbuscador.DetailPokemonActivity.Companion.EXTRA_ID
 import com.example.brawlbuscador.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +16,6 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         // Inicializar el adaptador y RecyclerView
         adapter = PokemonAdapter { pokemonId -> navigateToDetail(pokemonId.toString()) }
-        binding.rvbrawl.apply {
+        binding.rvpokemon.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = this@MainActivity.adapter
@@ -64,41 +61,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun searchByName(query: String) {
-        if (query.isEmpty()) return // No hacer la búsqueda si el campo está vacío
         binding.progressBar.isVisible = true
-
         CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val myResponse: Response<PokemonDataResponse> =
-                    retrofit.create(ApiService::class.java).getPokemon(query)
+            val myResponse: Response<PokemonList> = retrofit.create(ApiService::class.java).getAllPokemon()
 
-                if (myResponse.isSuccessful) {
-                    myResponse.body()?.let { response ->
-                        // Aquí actualizamos con la lista completa de Pokémon, no solo tipos
-                        withContext(Dispatchers.Main) {
-                            adapter.updateList(listOf(response))  // Pasar Pokémon completo a la lista
-                            binding.progressBar.isVisible = false
-                        }
-                    } ?: run {
-                        Log.e("MainActivity", "Response body is null")
-                        withContext(Dispatchers.Main) {
-                            binding.progressBar.isVisible = false
-                        }
+            if (myResponse.isSuccessful) {
+                Log.i("aristidevs", "Funciona")
+                val response: PokemonList? = myResponse.body()
+
+                if (response != null) {
+                    Log.i("aristidevs", response.toString())
+
+                    // Filtrar los Pokémon cuyos nombres contienen la consulta de búsqueda
+                    val newPokemonList = response.pokemon.filter { pokemon ->
+                        pokemon.name.contains(query, ignoreCase = true)
                     }
-                } else {
-                    Log.e("MainActivity", "Failed response: ${myResponse.code()}")
+
                     withContext(Dispatchers.Main) {
+                        adapter.updateList(newPokemonList) // Pasamos la lista filtrada al adaptador
                         binding.progressBar.isVisible = false
                     }
                 }
-            } catch (e: Exception) {
-                Log.e("MainActivity", "Error during API call", e)
+            } else {
+                Log.i("aristidevs", "No Funciona")
                 withContext(Dispatchers.Main) {
                     binding.progressBar.isVisible = false
                 }
             }
         }
     }
+
+
+
+
 
     private fun getRetrofit(): Retrofit {
         return Retrofit
@@ -114,4 +109,3 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 }
-

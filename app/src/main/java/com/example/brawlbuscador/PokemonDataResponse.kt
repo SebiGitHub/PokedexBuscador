@@ -10,6 +10,16 @@ data class PokemonDataResponse(
     @SerializedName("types") val types: List<PokemonTypeResponse>  // Tipos del Pokémon
 )
 
+data class PokemonList(
+    @SerializedName("pokemon") val pokemon: List<PokemonDataResponse> = emptyList() // Lista vacía en caso de `null`
+)
+
+
+data class PokemonLista(
+    @SerializedName("pokemon") val pokemona: List<PokemonList>  // Lista de Pokémon
+)
+
+
 // Respuesta para las imágenes del Pokémon (sprites)
 data class PokemonSprites(
     @SerializedName("front_default") val frontDefault: String      // Imagen frontal del Pokémon

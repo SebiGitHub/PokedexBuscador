@@ -9,6 +9,10 @@ interface ApiService {
     @GET("pokemon/{name}")
     suspend fun getPokemon(@Path("name") pokemonName: String): Response<PokemonDataResponse>
 
-    @GET("/api/10229233666327556/{id}")
-    suspend fun getPokemonDetail(@Path("id") superheroId:String):Response<PokemonDetailResponse>
+    @GET("pokemon/{id}")
+    suspend fun getPokemonDetail(@Path("id") pokemonId:String): Response<PokemonDetailResponse>
+
+    @GET("pokemon?limit=1000") // Ajusta el límite según la API
+    suspend fun getAllPokemon(): Response<PokemonList>
+
 }
