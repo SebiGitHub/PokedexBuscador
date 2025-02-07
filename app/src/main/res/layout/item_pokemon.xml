@@ -15,12 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
+        <!-- Imagen del Pokémon -->
         <ImageView
-            android:id="@+id/ivSuperhero"
+            android:id="@+id/ivPokemon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_launcher_background" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -29,17 +30,17 @@
             android:background="@color/sh_stat_1">
 
             <TextView
-                android:id="@+id/tvSuperheroName"
+                android:id="@+id/tvPokemonName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Brawl Stars"
+                android:text="Pokémon"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:text="Pikachu" />
 
         </FrameLayout>
 
     </FrameLayout>
-
 
 </androidx.cardview.widget.CardView>

@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailSuperheroActivity">
+    tools:context=".DetailPokemonActivity">
 
     <ImageView
-        android:id="@+id/ivSuperhero"
+        android:id="@+id/ivPokemon"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
@@ -28,39 +28,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvSuperheroName"
+                android:id="@+id/tvPokemonName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="28sp"
                 android:gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                tools:text="Viva la barby"/>
+                tools:text="Pikachu"/>
 
             <TextView
-                android:id="@+id/tvSuperheroRealName"
+                android:id="@+id/tvPokemonId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:textStyle="italic"
-                tools:text="Cositas"/>
+                tools:text="ID: 25"/>
 
             <TextView
-                android:id="@+id/tvPublisher"
+                android:id="@+id/tvTypes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:textSize="11sp"
-                tools:text="Cositas"/>
-
+                tools:text="Types: Electric"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -70,47 +68,33 @@
                 android:gravity="bottom"
                 android:orientation="horizontal" >
 
-                <!-- GRAFICAS -->
+                <!-- GRAFICAS (Estadísticas) -->
                 <View
-                    android:id="@+id/viewIntelligence"
+                    android:id="@+id/viewHP"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@color/sh_stat_1"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"/>
                 <View
-                    android:id="@+id/viewStrength"
+                    android:id="@+id/viewAttack"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@color/sh_stat_2"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"/>
                 <View
-                    android:id="@+id/viewSpeed"
+                    android:id="@+id/viewDefense"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@color/sh_stat_3"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"/>
                 <View
-                    android:id="@+id/viewDurability"
+                    android:id="@+id/viewSpeed"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@color/sh_stat_4"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_weight="1"/>
-                <View
-                    android:id="@+id/viewPower"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:background="@color/sh_stat_5"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_weight="1"/>
-                <View
-                    android:id="@+id/viewCombat"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:background="@color/sh_stat_6"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"/>
 
@@ -131,7 +115,7 @@
                     android:singleLine="true"
                     android:textSize="10sp"
                     android:maxLines="1"
-                    android:text="Intelligence"
+                    android:text="HP"
                     android:layout_weight="1"/>
                 <TextView
                     android:layout_width="0dp"
@@ -140,7 +124,16 @@
                     android:textSize="10sp"
                     android:singleLine="true"
                     android:maxLines="1"
-                    android:text="Strength"
+                    android:text="Attack"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:textSize="10sp"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:text="Defense"
                     android:layout_weight="1"/>
                 <TextView
                     android:layout_width="0dp"
@@ -150,33 +143,6 @@
                     android:singleLine="true"
                     android:maxLines="1"
                     android:text="Speed"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:textSize="10sp"
-                    android:singleLine="true"
-                    android:maxLines="1"
-                    android:text="Durability"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:textSize="10sp"
-                    android:singleLine="true"
-                    android:maxLines="1"
-                    android:text="Power"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:textSize="10sp"
-                    android:singleLine="true"
-                    android:maxLines="1"
-                    android:text="Combat"
                     android:layout_weight="1"/>
 
             </LinearLayout>
