@@ -45,7 +45,9 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty()) {
                     binding.progressBar.isVisible = false
-                    adapter.updateList(emptyList())  // Limpiar lista si no hay texto
+                    adapter.updateListName(emptyList())
+                    adapter.updateListSprites(emptyList())
+                    adapter.updateListId(emptyList()) // Limpiar lista si no hay texto
                 }
                 return false
             }
@@ -63,34 +65,66 @@ class MainActivity : AppCompatActivity() {
     private fun searchByName(query: String) {
         binding.progressBar.isVisible = true
         CoroutineScope(Dispatchers.IO).launch {
-            val myResponse: Response<PokemonList> = retrofit.create(ApiService::class.java).getAllPokemon()
 
-            if (myResponse.isSuccessful) {
-                Log.i("aristidevs", "Funciona")
-                val response: PokemonList? = myResponse.body()
+            val myResponseName: Response<PokemonsListNames> =
+                retrofit.create(ApiService::class.java).getPokemonName(query)
 
-                if (response != null) {
-                    Log.i("aristidevs", response.toString())
+            if (myResponseName.isSuccessful) {
+                Log.i("aristidevs", "funciona :)")
 
-                    // Filtrar los Pokémon cuyos nombres contienen la consulta de búsqueda
-                    val newPokemonList = response.pokemon.filter { pokemon ->
-                        pokemon.name.contains(query, ignoreCase = true)
-                    }
+                val responseName: PokemonsListNames? = myResponseName.body()
 
-                    withContext(Dispatchers.Main) {
-                        adapter.updateList(newPokemonList) // Pasamos la lista filtrada al adaptador
+                if (responseName != null) {
+                    Log.i("aristidevs", responseName.toString())
+                    runOnUiThread {
+                        adapter.updateListName(responseName.species)
                         binding.progressBar.isVisible = false
                     }
                 }
             } else {
-                Log.i("aristidevs", "No Funciona")
-                withContext(Dispatchers.Main) {
-                    binding.progressBar.isVisible = false
+                Log.i("aristidevs", "No funciona :(")
+            }
+
+            val myResponseSprites: Response<PokemonsListSprites> =
+                retrofit.create(ApiService::class.java).getPokemonSprites(query)
+
+            if (myResponseSprites.isSuccessful) {
+                Log.i("aristidevs", "funciona :)")
+
+                val responseSprites: PokemonsListSprites? = myResponseSprites.body()
+
+                if (responseSprites != null) {
+                    Log.i("aristidevs", responseSprites.toString())
+                    runOnUiThread {
+                        adapter.updateListSprites(responseSprites.sprites)
+                        binding.progressBar.isVisible = false
+                    }
                 }
+            } else {
+                Log.i("aristidevs", "No funciona :(")
+            }
+
+            val myResponseId: Response<PokemonId> =
+                retrofit.create(ApiService::class.java).getPokemonId(query)
+
+
+            if (myResponseSprites.isSuccessful) {
+                Log.i("aristidevs", "funciona :)")
+
+                val responseId: PokemonId? = myResponseId.body()
+
+                if (responseId != null) {
+                    Log.i("aristidevs", responseId.toString())
+                    runOnUiThread {
+                        adapter.updateListId(responseId.id)
+                        binding.progressBar.isVisible = false
+                    }
+                }
+            } else {
+                Log.i("aristidevs", "No funciona :(")
             }
         }
     }
-
 
 
 

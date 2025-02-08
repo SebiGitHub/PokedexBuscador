@@ -5,13 +5,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class PokemonAdapter(
-    private var pokemonList: List<PokemonDataResponse> = emptyList(),
-    private val onItemSelected: (Int) -> Unit
+    private var pokemonListName: List<PokemonNames> = emptyList(),
+    private var pokemonListSprites: List<PokemonSprites> = emptyList(),
+    private var pokemonListId: List<PokemonId> = emptyList(),
+    private val onItemSelected: (String) -> Unit
 ) : RecyclerView.Adapter<PokemonViewHolder>() {
 
     // Actualiza la lista de Pokémon
-    fun updateList(newPokemonList: List<PokemonDataResponse>) {
-        this.pokemonList = newPokemonList
+    fun updateListName(newPokemonListName: List<PokemonNames>) {
+        this.pokemonListName = newPokemonListName
+        notifyDataSetChanged()
+    }
+
+    fun updateListSprites(pokemonListSprites: List<PokemonSprites>) {
+        this.pokemonListSprites = pokemonListSprites
+        notifyDataSetChanged()
+    }
+
+    fun updateListId(pokemonListId: List<PokemonId>) {
+        this.pokemonListId = pokemonListId
         notifyDataSetChanged()
     }
 
@@ -22,8 +34,10 @@ class PokemonAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: PokemonViewHolder, position: Int) {
-        viewHolder.bind(pokemonList[position], onItemSelected)
+        viewHolder.bindName(pokemonListName[position])
+        viewHolder.bindSprites(pokemonListSprites[position])
+        viewHolder.bindId(pokemonListId[position], onItemSelected)
     }
 
-    override fun getItemCount() = pokemonList.size
+    override fun getItemCount() = pokemonListName.size
 }

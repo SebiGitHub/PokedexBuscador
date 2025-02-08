@@ -4,10 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 // Respuesta básica al buscar un Pokémon
 data class PokemonDataResponse(
-    @SerializedName("id") val id: Int,                            // ID único del Pokémon
-    @SerializedName("name") val name: String,                      // Nombre del Pokémon
-    @SerializedName("sprites") val sprites: PokemonSprites,        // Imagen del Pokémon
-    @SerializedName("types") val types: List<PokemonTypeResponse>  // Tipos del Pokémon
+    @SerializedName("types") val types: List<PokemonTypeResponse>,  // Tipos del Pokémon
 )
 
 data class PokemonList(
@@ -15,15 +12,33 @@ data class PokemonList(
 )
 
 
-data class PokemonLista(
-    @SerializedName("pokemon") val pokemona: List<PokemonList>  // Lista de Pokémon
+//Id
+data class PokemonId(
+    @SerializedName("id") val id: List<PokemonId> = emptyList(),  // ID único del Pokémon
+    @SerializedName("id") val id1: String  // ID único del Pokémon
 )
 
 
-// Respuesta para las imágenes del Pokémon (sprites)
+//Sprite
+data class PokemonsListSprites(
+    @SerializedName("sprites") val sprites: List<PokemonSprites>       // Imagen del Pokémon)
+)
+
 data class PokemonSprites(
-    @SerializedName("front_default") val frontDefault: String      // Imagen frontal del Pokémon
+    @SerializedName("front_default") val frontDefault: String // Imagen frontal del Pokémon
 )
+
+
+//Name
+data class PokemonsListNames(
+    @SerializedName("species") val species: List<PokemonNames> // Lista de Pokémon
+)
+
+data class PokemonNames(
+    @SerializedName("name") val name: String // Nombre del Pokémon
+)
+
+
 
 // Respuesta de los tipos del Pokémon (por ejemplo, fuego, agua, etc.)
 data class PokemonTypeResponse(
