@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fondo negro del D-Pad -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#000000"/>
+            <size android:width="100dp" android:height="100dp"/>
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+
+    <!-- Parte vertical del D-Pad -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#111111"/>
+            <size android:width="10dp" android:height="1200dp"/>
+            <corners android:radius="5dp"/>
+        </shape>
+    </item>
+
+    <!-- Parte horizontal del D-Pad -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#000000"/>
+            <size android:width="400dp" android:height="40dp"/>
+            <corners android:radius="5dp"/>
+        </shape>
+    </item>
+
+</layer-list>
