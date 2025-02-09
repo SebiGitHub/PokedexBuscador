@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_gravity="bottom"
-            android:background="@color/sh_stat_1">
+            android:background="@color/p_stat_2">
 
             <TextView
                 android:id="@+id/tvPokemonName"
@@ -35,8 +35,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Pokémon"
+                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 tools:text="Pikachu" />
 
         </FrameLayout>

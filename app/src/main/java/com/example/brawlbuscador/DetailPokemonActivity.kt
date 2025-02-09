@@ -1,6 +1,8 @@
 package com.example.brawlbuscador
 
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.brawlbuscador.databinding.ActivityDetailPokemonBinding
@@ -11,6 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.roundToInt
 
 class DetailPokemonActivity : AppCompatActivity() {
 
@@ -48,13 +51,44 @@ class DetailPokemonActivity : AppCompatActivity() {
     }
 
     private fun createUI(pokemon: PokemonDetailResponse) {
-        Picasso.get()
-            .load(pokemon.sprites.frontDefault)
-
+        Picasso.get().load(pokemon.sprites.frontDefault).into(binding.ivPokemon)
+        Picasso.get().load(pokemon.sprites.frontDefault).into(binding.ivPokemonFront)
+        Picasso.get().load(pokemon.sprites.backDefault).into(binding.ivPokemonBack)
+        Picasso.get().load(pokemon.sprites.frontShiny).into(binding.ivPokemonFrontShiny)
+        Picasso.get().load(pokemon.sprites.backShiny).into(binding.ivPokemonBackShiny)
+        prepareStats(pokemon.stats)
         binding.tvPokemonName.text = pokemon.name.replaceFirstChar { it.uppercase() }
-        binding.tvPokemonId.text = "ID: ${pokemon.id}"
+        binding.tvPokemonId.text = "Nº Pokedex: ${pokemon.id}"
         binding.tvTypes.text = "Types: ${pokemon.types.joinToString { it.type.name.capitalize() }}"
+        binding.tvAb1.text = "${pokemon.abilities.joinToString { it.ability.name.capitalize() }}"
     }
+
+
+    private fun prepareStats(stats: List<PokemonStatResponse>) {
+        for (statResponse in stats) {
+            val baseStat = statResponse.baseStat
+            when (statResponse.stat.name) {
+                "hp" -> updateHeight(binding.viewHP, baseStat.toString())
+                "attack" -> updateHeight(binding.viewAttack, baseStat.toString())
+                "defense" -> updateHeight(binding.viewDefense, baseStat.toString())
+                "special-attack" -> updateHeight(binding.viewAttackS, baseStat.toString())
+                "special-defense" -> updateHeight(binding.viewDefenseS, baseStat.toString())
+                "speed" -> updateHeight(binding.viewSpeed, baseStat.toString())
+            }
+        }
+    }
+
+
+    private fun updateHeight(view: View, stat:String) {
+        val params = view.layoutParams
+        params.height = pxToDp(stat.toFloat())
+        view.layoutParams = params
+    }
+
+    private fun pxToDp(px:Float): Int{
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, px, resources.displayMetrics).roundToInt()
+    }
+
 
     private fun getRetrofit(): Retrofit {
         return Retrofit

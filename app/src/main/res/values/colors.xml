@@ -5,11 +5,14 @@
     <color name="beige">#f9fbc1</color>
     <color name="trasparente">#8B673AB7</color>
     <color name="celeste">#4eecf6</color>
+    <color name="red">#ff3434</color>
 
-    <color name="sh_stat_1">#ff3434</color>
-    <color name="sh_stat_2">#97F64E</color>
-    <color name="sh_stat_3">#7886F8</color>
-    <color name="sh_stat_4">#FFE420</color>
-    <color name="sh_stat_5">#FF27F6</color>
-    <color name="sh_stat_6">#9613F8</color>
+
+    <!-- Stats -->
+    <color name="p_stat_1">#73f233</color>
+    <color name="p_stat_2">#f31313</color>
+    <color name="p_stat_3">#0ad6ff</color>
+    <color name="p_stat_4">#ff9b0a</color>
+    <color name="p_stat_5">#a531fa</color>
+    <color name="p_stat_6">#f7ff00</color>
 </resources>
