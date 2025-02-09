@@ -3,6 +3,7 @@ package com.example.brawlbuscador
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -15,6 +16,9 @@ interface ApiService {
     @GET("pokemon/{name}")
     suspend fun getPokemonId(@Path("name") pokemonName: String): Response<PokemonId>
 
+
+    @GET("pokemon")
+    suspend fun getPokemonList(@Query("limit") limit: Int): Response<PokemonListResponse>
 
 
     //Detail

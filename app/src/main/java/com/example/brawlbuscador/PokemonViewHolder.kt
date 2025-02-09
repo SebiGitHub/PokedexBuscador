@@ -9,30 +9,14 @@ class PokemonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemPokemonBinding.bind(view)
 
-    fun bind(pokemon: PokemonDataResponse, ) {
+    fun bind(pokemon: PokemonData, onItemSelected: (Int) -> Unit) {
+        binding.tvPokemonName.text = pokemon.name.replaceFirstChar { it.uppercase() }
 
-
-
-
-    }
-
-    fun bindName(pokemonName: PokemonNames) {
-        // Capitaliza el nombre del Pokémon
-        binding.tvPokemonName.text = pokemonName.name
-
-    }
-
-    fun bindSprites(pokemonSprites: PokemonSprites) {
-        // Carga la imagen con Picasso y maneja los errores
         Picasso.get()
-            .load(pokemonSprites.frontDefault)
-            .error(R.drawable.default_pokemon_image)  // Imagen en caso de error
+            .load(pokemon.sprite)
+            .error(R.drawable.default_pokemon_image) // Imagen de respaldo en caso de error
             .into(binding.ivPokemon)
-    }
 
-    fun bindId(pokemonId: PokemonId, onItemSelected: (String) -> Unit) {
-        // Configura el listener para el clic
-        binding.root.setOnClickListener { onItemSelected(pokemonId.id1) }
+        binding.root.setOnClickListener { onItemSelected(pokemon.id) }
     }
 }
-

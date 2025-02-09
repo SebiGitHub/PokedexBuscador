@@ -7,21 +7,33 @@ data class PokemonDataResponse(
     @SerializedName("types") val types: List<PokemonTypeResponse>,  // Tipos del Pokémon
 )
 
-data class PokemonList(
-    @SerializedName("pokemon") val pokemon: List<PokemonDataResponse> = emptyList() // Lista vacía en caso de `null`
+data class PokemonData(
+    val name: String,
+    val sprite: String,
+    val id: Int
 )
+
+
+data class PokemonListResponse(
+    @SerializedName("results") val results: List<PokemonNameResponse>
+)
+
+data class PokemonNameResponse(
+    @SerializedName("name") val name: String,
+    @SerializedName("url") val url: String
+)
+
 
 
 //Id
 data class PokemonId(
-    @SerializedName("id") val id: List<PokemonId> = emptyList(),  // ID único del Pokémon
-    @SerializedName("id") val id1: String  // ID único del Pokémon
+    @SerializedName("id") val id: Int  // ID único del Pokémon
 )
 
 
 //Sprite
 data class PokemonsListSprites(
-    @SerializedName("sprites") val sprites: List<PokemonSprites>       // Imagen del Pokémon)
+    @SerializedName("sprites") val sprites: PokemonSprites // Imagen del Pokémon)
 )
 
 data class PokemonSprites(
@@ -31,7 +43,7 @@ data class PokemonSprites(
 
 //Name
 data class PokemonsListNames(
-    @SerializedName("species") val species: List<PokemonNames> // Lista de Pokémon
+    @SerializedName("form") val form: List<PokemonNames> // Lista de Pokémon
 )
 
 data class PokemonNames(
