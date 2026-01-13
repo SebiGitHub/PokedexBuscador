@@ -1,11 +1,36 @@
-Qué es
+# PokedexBuscador
 
-PokedexBuscador es una aplicación que actúa como buscador de pokémon, integrándose con PokéAPI para obtener datos sobre pokémon — estadísticas, tipos, nombres, identificadores, etc. Funciona como una “Pokédex digital”: permite al usuario buscar por nombre o número de pokémon y ver su información.
+## Qué es
+App Android en Kotlin que consume una API pública de Pokémon para buscar criaturas por nombre/ID y mostrar información detallada (tipos, habilidades, sprites, etc.).
 
-Para qué sirve
+## Stack
+- Kotlin
+- Android Studio
+- API: PokeAPI (REST)
+- Parsing: Gson / Kotlinx Serialization
+- Arquitectura: MVVM + ViewModel + LiveData/Flow
 
-Sirve como demostración práctica de consumo de APIs, manipulación de JSON, solicitudes HTTP y procesamiento de datos dinámicos. Para alguien interesado en aprender desarrollo web o apps ligeras: permite ver claramente cómo pedir información externa, procesarla y presentarla de forma amigable. Además, para fans del universo Pokémon, cumple la función de herramienta referencial / de consulta.
+## Features
+- Buscador por nombre/ID con validaciones
+- Vista de detalle con stats (tipos, habilidades, peso/altura, sprites)
+- Manejo de estados: loading / error / vacío
 
-Propósito
+## Capturas/GIF
+<img width="547" height="1244" alt="Captura de pantalla 2026-01-13 123634" src="https://github.com/user-attachments/assets/cd48653c-e002-4268-8de4-6f5ee5c3bf25" />
+<img width="552" height="1245" alt="Captura de pantalla 2026-01-13 123727" src="https://github.com/user-attachments/assets/666b7deb-af18-4775-8a99-ec3fc9654c63" />
 
-El propósito es doble: por un lado, educativo/práctico — consolidar conocimientos de llamadas a APIs, manejo de datos externos, asincronía o fetch (dependiendo del lenguaje). Por otro, mostrar capacidad de construir una aplicación completa que integra front-end o lógica de cliente con un backend externo (la API), útil como proyecto de portfolio o prueba de habilidad técnica.
+## Cómo ejecutar
+1. Clona el repositorio
+2. Abre el proyecto en Android Studio
+3. Sincroniza Gradle (Gradle Sync)
+4. Ejecuta en emulador o dispositivo (Run ▶️)
+5. (Opcional) Si usas API key o config:
+   - Crea `secrets.properties` con:
+     API_KEY=tu_clave
+   - En Gradle se lee esa variable para usarla en la app.
+
+## Qué aprendí
+- Consumir APIs REST desde Android y mapear respuestas a modelos Kotlin
+- Diseñar UI/UX de búsqueda: errores, vacíos, loading y estados consistentes
+- Separar responsabilidades (data / domain / UI) para mantener el proyecto limpio
+- Buenas prácticas: evitar hardcodeo, manejo de errores y código testeable
